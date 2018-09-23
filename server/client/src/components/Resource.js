@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import NoResource from "./NoResource";
 
 class Resource extends Component {
   constructor(props){
