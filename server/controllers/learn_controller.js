@@ -158,7 +158,10 @@ module.exports = {
         const updatedProperties = req.body;
         Topic.findOneAndUpdate({_id: topicId}, updatedProperties)
             .then(() => Topic.findById({_id: topicId}))
-            .then(topic => res.send(topic))
+            .then(topic => {
+                module.exports.updateMainTopicPercentage(topic.maintopic_id);
+                res.send(topic);
+            })
             .catch(next);
     },
     updateSubTopic(req, res, next){
@@ -166,7 +169,10 @@ module.exports = {
         const updatedProperties = req.body;
         SubTopic.findOneAndUpdate({_id: subTopicId}, updatedProperties)
             .then(() => SubTopic.findById({_id: subTopicId}))
-            .then(subtopic => res.send(subtopic))
+            .then(subtopic => {
+                module.exports.updateTopicPercentage(subtopic.topic_id);
+                res.send(subtopic);
+            })
             .catch(next);
     },
     updateResource(req, res, next){
@@ -174,7 +180,10 @@ module.exports = {
         const updatedProperties = req.body;
         Resources.findOneAndUpdate({_id: resourceId}, updatedProperties)
             .then(() => Resources.findById({_id: resourceId}))
-            .then(resource => res.send(resource))
+            .then(resource => {
+                module.exports.updateSubtopicPercentage(resourceId);
+                res.send(resource);
+            })
             .catch(next);
     },
     deleteMainTopic(req, res, next){
@@ -200,5 +209,48 @@ module.exports = {
         Resources.findByIdAndRemove({_id: resourceId})
             .then(() => res.status(204).json({"resource": "deleted with success"}))
             .catch(next)
+    },
+    updateSubtopicPercentage(id){
+        let nResources = 0.0;
+        let subtopic_conclusion = 0.0;
+        let subtopic_id = '';
+        Resources.find({ subtopic_id: id })
+            .then(resources => {
+                resources.map(function (resource) {
+                    subtopic_id = resource.subtopic_id;
+                    if (resource.concluded){
+                        nResources += 1;
+                    }
+                });
+                subtopic_conclusion = (nResources / resources.length) * 100;
+                SubTopic.findOneAndUpdate({_id: subtopic_id}, {percentage_concluded: subtopic_conclusion})
+                    .then();
+            });
+    },
+    updateTopicPercentage: function (id) {
+        let nSubtopics = 0.0;
+        let topic_conclusion = 0.0;
+        SubTopic.find({topic_id: id})
+            .then(subtopics => {
+                subtopics.map(function (subtopic) {
+                    nSubtopics += subtopic.percentage_concluded;
+                })
+                topic_conclusion = (nSubtopics / subtopics.length);
+                Topic.findOneAndUpdate({_id: id}, {percentage_concluded: topic_conclusion})
+                    .then(() => console.log(''));
+            });
+    },
+    updateMainTopicPercentage(id) {
+        let nTopics = 0.0;
+        let maintopic_conclusion = 0.0;
+        Topic.find({maintopic_id: id})
+            .then(topics => {
+                topics.map(function (topic) {
+                    nTopics += topic.percentage_concluded;
+                })
+                maintopic_conclusion = (nTopics / topics.length);
+                MainTopic.findOneAndUpdate({_id: id}, {percentage_concluded: maintopic_conclusion})
+                    .then(() => console.log(''));
+            });
     }
 }
