@@ -6,13 +6,19 @@ const app = require("../app");
 
 chai.use(chaiHttp);
 
-describe("First Test", () => {
-	it("Application test", (done) => {
+describe("All Tests", () => {
+	it("Application test", () => {
 		chai.request(app)
 			.get("/api")
 			.end((err, res) => {
 				res.should.have.status(200);
-				done();
+			});
+	});
+	it("Try to GET all", () => {
+		chai.request(app)
+			.get("/api/all")
+			.end((err, res) => {
+				res.should.have.status(200);
 			});
 	});
 });
