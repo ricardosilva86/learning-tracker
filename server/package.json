@@ -4,7 +4,7 @@
   "description": "Learning Tracker API server.",
   "main": "index.js",
   "scripts": {
-    "test": "concurrently \"mocha --time-out 2000\" \"eslint .\"",
+    "test": "concurrently \"mocha --timeout 2000\" \"eslint .\"",
     "start": "node index.js",
     "server": "nodemon index.js",
     "client": "npm run start --prefix client",
