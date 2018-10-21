@@ -7,6 +7,7 @@ import "./App.css";
 import Learning from "./components/Learning";
 
 import "./index.css";
+import CreateNewMainTopic from "./components/CreateNewMainTopic";
 
 class App extends Component {
 	render() {
@@ -14,6 +15,7 @@ class App extends Component {
 			<div className="App">
 				<Header branding="Learn Tracker"/>
 				<div className="container">
+					<CreateNewMainTopic />
 					<Learning />
 				</div>
 			</div>
