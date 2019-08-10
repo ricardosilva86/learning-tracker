@@ -1,0 +1,15 @@
+version: "2"
+services:
+  node:
+    image: "node:alpine"
+    user: "node"
+    working_dir: /home/node/app
+    environment:
+      env_file:
+        - ./config/env
+    volumes:
+      - ./server:/home/node/app
+    ports:
+      - "3000:3000"
+      - "8080:8080"
+    command: ["npm", "install"]

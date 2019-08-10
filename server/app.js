@@ -4,7 +4,7 @@ const routes = require("./routes/routes");
 const app = express();
 const bodyParser = require("body-parser");
 const config = require("./config/config");
-const cors = require('cors');
+const cors = require("cors");
 
 mongoose.Promise = global.Promise;
 if (process.env.NODE_ENV !== "test"){

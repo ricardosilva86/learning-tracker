@@ -1,35 +1,53 @@
 import React, {Component} from "react";
-import axios from 'axios';
+import axios from "axios";
+import $ from "jquery";
 
 class CreateNewMainTopic extends Component{
-	state = {
-		title: '',
-		percentage_concluded: ''
+	constructor(props){
+		super(props);
+		this.onSubmit = this.onSubmit.bind(this);
+		this.inputTitle = React.createRef();
+		this.inputPercentage = React.createRef();
+	}
+	static defaultProps = {
+		title: "MainTopic title",
+		percentage_concluded: "0"
 	};
-	onSubmit = e => {
+
+	onSubmit(e){
 		e.preventDefault();
-		axios.post("http://localhost:8080/api/maintopic", {
-			title:this.state.title,
-			percentage_concluded:this.state.percentage_concluded
-		});
+		axios.post("http://localhost:8080/api/maintopic",
+			{
+				title: this.inputTitle.current.value,
+                percentage_concluded: this.inputPercentage.current.value
+			})
+			.then(
+				$.ajax({
+					url: "/api/all",
+					dataType: "json",
+					success: function (dados) {
+						this.setState({matter: dados})
+					}.bind(this)
+				})
+			);
 	};
-	onChange = e => {this.setState({ [e.target.name]: e.target.value })}
+
 	render() {
-		const {title, percentage_concluded} = this.state;
+		const {title, percentage_concluded} = this.props;
 		return(
 			<div className="card mb-3">
-                <div className="card-header">Add a New Main Topic</div>
-                <div className="card-body">
-                    <form onSubmit={this.onSubmit}>
+				<div className="card-header">Add a New Main Topic</div>
+				<div className="card-body">
+					<form onSubmit={this.onSubmit}>
 						<div className="form-group">
-                            <label htmlFor="title">Title</label>
-                            <input type="text" className="form-control " name="title" placeholder="Title" value={title} onChange={this.onChange}/>
+							<label htmlFor="title">Title</label>
+							<input type="text" className="form-control " name="title" placeholder="Title" defaultValue={title} ref={this.inputTitle}/>
 						</div>
-                        <div className="form-group">
-                            <label htmlFor="percentage_concluded">Percentage Concluded</label>
-                            <input type="number" className="form-control " name="percentage_concluded" placeholder="Percentage Concluded" value={percentage_concluded} onChange={this.onChange}/>
-                        </div>
-                        <input type="submit" className="btn btn-light"/>
+						<div className="form-group">
+							<label htmlFor="percentage_concluded">Percentage Concluded</label>
+							<input type="number" className="form-control " name="percentage_concluded" placeholder="Percentage Concluded" defaultValue={percentage_concluded} ref={this.inputPercentage}/>
+						</div>
+						<input type="submit" className="btn btn-light"/>
 					</form>
 				</div>
 			</div>

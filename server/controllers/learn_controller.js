@@ -106,7 +106,6 @@ module.exports = {
 
 	createMainTopic (req, res, next) {
 		const matter = req.body;
-		console.log(matter);
 		MainTopic.create(matter)
 			.then(main => {
 				res.send(main);
