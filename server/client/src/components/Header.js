@@ -18,9 +18,14 @@ const Header = props => {
 							<a href="/" className="nav-link">Home</a>
 						</li>
 						<li className="nav-item text-white"><p className="nav-link"><span className="branco">|</span></p></li>
-						<li className="nav-item">
-							<a href="/create" className="nav-link">Create New</a>
-						</li>
+						<div className="nav-item dropdown">
+							<a className="dropdown-toggle text-white" href="#" id="dropdownlink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Create</a>
+							<div className="dropdown-menu" aria-labelledby="dropdownlink">
+								<a href="/create/main" className="nav-link text-dark">Main Topic</a>
+								<a href="/create/sub" className="nav-link text-dark">Sub Topic</a>
+								<a href="/create/topic" className="nav-link text-dark">Topic</a>
+							</div>
+						</div>
 						<li className="nav-item text-white"><p className="nav-link"><span className="branco">|</span></p></li>
 						<li className="nav-item">
 							<a href="/about" className="nav-link">About</a>
