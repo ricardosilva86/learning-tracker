@@ -12,6 +12,7 @@ import "./index.css";
 import CreateNewMainTopic from "./components/CreateNewMainTopic";
 import CreateNewTopic from "./components/CreateNewTopic";
 import CreateNewSubTopic from "./components/CreateNewSubTopic";
+import CreateNewResource from "./components/CreateNewResource";
 
 class App extends Component {
 	render() {
@@ -23,8 +24,9 @@ class App extends Component {
 						<Switch>
 							<Route exact path="/" component={Learning} />
 							<Route exact path="/create/main" component={CreateNewMainTopic} />
-							<Route exact path="/create/sub" component={CreateNewTopic} />
-							<Route exact path="/create/topic" component={CreateNewSubTopic} />
+							<Route exact path="/create/topic" component={CreateNewTopic} />
+							<Route exact path="/create/sub" component={CreateNewSubTopic} />
+							<Route exact path="/create/resource" component={CreateNewResource} />
 							<Route exact path="/about" component={About} />
 						</Switch>
 					</div>

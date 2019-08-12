@@ -11,3 +11,11 @@ body {
 .branco {
   color: white;
 }
+
+.dropdown-toggle {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-items: center;
+  justify-content: center;
+}

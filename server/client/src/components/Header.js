@@ -22,8 +22,9 @@ const Header = props => {
 							<a className="dropdown-toggle text-white" href="#" id="dropdownlink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Create</a>
 							<div className="dropdown-menu" aria-labelledby="dropdownlink">
 								<a href="/create/main" className="nav-link text-dark">Main Topic</a>
-								<a href="/create/sub" className="nav-link text-dark">Sub Topic</a>
 								<a href="/create/topic" className="nav-link text-dark">Topic</a>
+								<a href="/create/sub" className="nav-link text-dark">Sub Topic</a>
+								<a href="/create/resource" className="nav-link text-dark">Resource</a>
 							</div>
 						</div>
 						<li className="nav-item text-white"><p className="nav-link"><span className="branco">|</span></p></li>

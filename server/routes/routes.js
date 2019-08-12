@@ -6,6 +6,7 @@ module.exports = (app) => {
 	app.get("/api/all", LearnController.getAll);
 	app.get("/api/get/:id", LearnController.getAllById);
 	app.get("/api/get/maintopic/:id", LearnController.getMainTopic);
+	app.get("/api/all/maintopics", LearnController.getMainTopicsOnly);
 	app.get("/api/get/topic/:id", LearnController.getTopic);
 	app.get("/api/get/subtopic/:id", LearnController.getSubTopic);
 	app.get("/api/get/resource/:id", LearnController.getResource);

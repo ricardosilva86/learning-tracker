@@ -27,6 +27,13 @@ module.exports = {
 			})
 			.catch(next);
 	},
+	getMainTopicsOnly(req, res, next){
+		MainTopic.find()
+			.then(maintopic => {
+				res.send(maintopic);
+			})
+			.catch(next);
+	},
 	getTopic(req, res, next){
 		const topicId = req.params.id;
 		Topic.findById({_id: topicId})

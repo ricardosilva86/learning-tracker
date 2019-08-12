@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import axios from "axios";
 import $ from "jquery";
 
-class CreateNewSubTopic extends Component{
+class CreateNewResource extends Component{
 	constructor(props){
 		super(props);
 		this.onSubmit = this.onSubmit.bind(this);
@@ -36,7 +36,7 @@ class CreateNewSubTopic extends Component{
 		const {title, percentage_concluded} = this.props;
 		return(
 			<div className="card mb-3">
-				<div className="card-header">Add a New Sub Topic</div>
+				<div className="card-header">Add a New Resource</div>
 				<div className="card-body">
 					<form onSubmit={this.onSubmit}>
 						<div className="form-group">
@@ -44,7 +44,7 @@ class CreateNewSubTopic extends Component{
 							<input type="text" className="form-control " name="title" placeholder="Title" defaultValue={title} ref={this.inputTitle}/>
 						</div>
 						<div class="row">
-							<div class="col-sm-6">
+							<div class="col-sm-4">
 								<div class="card">
 								<div class="card-body">
 									<h5 class="card-title">Select Main Topic</h5>
@@ -56,7 +56,7 @@ class CreateNewSubTopic extends Component{
 								</div>
 								</div>
 							</div>
-							<div class="col-sm-6">
+							<div class="col-sm-4">
 								<div class="card">
 								<div class="card-body">
 									<h5 class="card-title">Select Topic</h5>
@@ -68,7 +68,23 @@ class CreateNewSubTopic extends Component{
 								</div>
 								</div>
 							</div>
+                            <div class="col-sm-4">
+								<div class="card">
+								<div class="card-body">
+									<h5 class="card-title">Select Sub Topic</h5>
+									<select class="custom-select custom-select-md" size="5">
+										<option value="1">One</option>
+										<option value="2">Two</option>
+										<option value="3">Three</option>
+									</select>
+								</div>
+								</div>
 							</div>
+							</div>
+						<div className="form-group">
+							<label htmlFor="percentage_concluded">Link</label>
+							<input type="text" className="form-control " name="percentage_concluded" placeholder="URL of resource" ref={this.inputPercentage}/>
+						</div>
 						<div className="form-group">
 							<label htmlFor="percentage_concluded">Percentage Concluded</label>
 							<input type="number" className="form-control " name="percentage_concluded" placeholder="Percentage Concluded" defaultValue={percentage_concluded} ref={this.inputPercentage}/>
@@ -81,4 +97,4 @@ class CreateNewSubTopic extends Component{
 	}
 }
 
-export default CreateNewSubTopic;
+export default CreateNewResource;
