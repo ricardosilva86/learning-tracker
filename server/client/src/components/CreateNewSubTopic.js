@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import axios from "axios";
 import $ from "jquery";
+import Select from 'react-select';
 
 class CreateNewSubTopic extends Component{
 	constructor(props){
@@ -8,18 +9,51 @@ class CreateNewSubTopic extends Component{
 		this.onSubmit = this.onSubmit.bind(this);
 		this.inputTitle = React.createRef();
 		this.inputPercentage = React.createRef();
+		this.state = { 
+			mainTopicSelected: null,
+			topicSelected: null,
+			allMainTopics: [],
+			allTopics: [],
+			matter: []
+		}
 	}
 	static defaultProps = {
-		title: "MainTopic title",
+		title: "SubTopic title",
 		percentage_concluded: "0"
+	};
+
+	async componentDidMount() {
+		const res = await axios.get('/api/all/maintopics');
+		this.setState({ allMainTopics: res.data });
+
+		const resTopic = await axios.get('/api/all/topics');
+		this.setState({ allTopics: resTopic.data });
+		
+	  }
+
+	async reloadTopics(maintopicId) {
+		const res = await axios.get('/api/all/topics/'+maintopicId);
+		this.setState({ allTopics: res.data });
+
+	}
+
+	handleMainTopicChange = mainTopicSelected => {
+		
+		this.setState({ mainTopicSelected });
+		this.reloadTopics(mainTopicSelected.value);
+	};
+
+	handleTopicChange = topicSelected => {
+		this.setState({ topicSelected });
 	};
 
 	onSubmit(e){
 		e.preventDefault();
-		axios.post("http://localhost:8080/api/maintopic",
+		axios.post("http://localhost:8080/api/subtopic",
 			{
 				title: this.inputTitle.current.value,
-                percentage_concluded: this.inputPercentage.current.value
+				percentage_concluded: this.inputPercentage.current.value,
+				topic_id: this.state.topicSelected.value
 			})
 			.then(
 				$.ajax({
@@ -34,6 +68,15 @@ class CreateNewSubTopic extends Component{
 
 	render() {
 		const {title, percentage_concluded} = this.props;
+		const { allMainTopics, allTopics, mainTopicSelected, topicSelected } = this.state;
+		let optionsMainTopics = [];
+		allMainTopics.forEach(element => {
+			optionsMainTopics.push({value: element._id, label: element.title})		
+		});
+		let optionsTopics = [];
+		allTopics.forEach(element => {
+			optionsTopics.push({value: element._id, label: element.title})		
+		});
 		return(
 			<div className="card mb-3">
 				<div className="card-header">Add a New Sub Topic</div>
@@ -43,28 +86,20 @@ class CreateNewSubTopic extends Component{
 							<label htmlFor="title">Title</label>
 							<input type="text" className="form-control " name="title" placeholder="Title" defaultValue={title} ref={this.inputTitle}/>
 						</div>
-						<div class="row">
-							<div class="col-sm-6">
-								<div class="card">
-								<div class="card-body">
-									<h5 class="card-title">Select Main Topic</h5>
-									<select class="custom-select custom-select-md" size="5">
-										<option value="1">One</option>
-										<option value="2">Two</option>
-										<option value="3">Three</option>
-									</select>
+						<div className="row">
+							<div className="col-sm-6">
+								<div className="card">
+								<div className="card-body">
+									<h5 className="card-title">Select Main Topic</h5>
+									<Select isLoading="true" options={optionsMainTopics} value={mainTopicSelected} onChange={this.handleMainTopicChange} />
 								</div>
 								</div>
 							</div>
-							<div class="col-sm-6">
-								<div class="card">
-								<div class="card-body">
-									<h5 class="card-title">Select Topic</h5>
-									<select class="custom-select custom-select-md" size="5">
-										<option value="1">One</option>
-										<option value="2">Two</option>
-										<option value="3">Three</option>
-									</select>
+							<div className="col-sm-6">
+								<div className="card">
+								<div className="card-body">
+									<h5 className="card-title">Select Topic</h5>
+									<Select isLoading="true" options={optionsTopics} value={topicSelected} onChange={this.handleTopicChange} />
 								</div>
 								</div>
 							</div>

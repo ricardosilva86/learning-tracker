@@ -9,37 +9,35 @@ class CreateNewTopic extends Component{
 		this.onSubmit = this.onSubmit.bind(this);
 		this.inputTitle = React.createRef();
 		this.inputPercentage = React.createRef();
-		this.allMainTopics = [];
-		this.options = {};
+		this.inputMainTopic = React.createRef();
+		this.state = { 
+			mainTopicSelected: null,
+			allMainTopics: [], 
+			matter: [] 
+		};
 	}
 	static defaultProps = {
-		title: "MainTopic title",
+		title: "Topic title",
 		percentage_concluded: "0"
 	};
 
 	async componentDidMount() {
-		try {
-			let allMainTopics = await axios.get('/api/all/maintopics')
-				.then(res => res.data);
-		
-			allMainTopics = allMainTopics;
-		
-			//Update state with new data and re-render our component.
-			const names = allMainTopics;
-			this.allMainTopics = names;
-			this.options = [
-				{ value: this.allMainTopics._id, label: this.allMainTopics.title }
-			];
-			
-		} catch (e) { }
+		const res = await axios.get('/api/all/maintopics');
+		this.setState({ allMainTopics: res.data });
 	  }
+
+	handleChange = mainTopicSelected => {
+		this.setState({ mainTopicSelected });
+		console.log(`Option selected:`, mainTopicSelected);
+	};
 
 	onSubmit(e){
 		e.preventDefault();
-		axios.post("http://localhost:8080/api/maintopic",
+		axios.post("http://localhost:8080/api/topic",
 		{
 			title: this.inputTitle.current.value,
-			percentage_concluded: this.inputPercentage.current.value
+			percentage_concluded: this.inputPercentage.current.value,
+			maintopic_id: this.state.mainTopicSelected.value
 		})
 		.then(
 			$.ajax({
@@ -53,7 +51,12 @@ class CreateNewTopic extends Component{
 		};
 		
 		render() {
-			const {title, percentage_concluded} = this.props;
+			const { title, percentage_concluded } = this.props;
+			const { allMainTopics, mainTopicSelected } = this.state;
+			let options = [];
+			allMainTopics.forEach(element => {
+				options.push({value: element._id, label: element.title})		
+			});
 			
 			
 		return(
@@ -67,7 +70,7 @@ class CreateNewTopic extends Component{
 						</div>
 						<div className="form-group">
 							<label htmlFor="maintopic_select">Main Topic for this Topic</label>
-							<Select isLoading="true" options={this.options} />
+							<Select isLoading="true" options={options} value={mainTopicSelected} onChange={this.handleChange} ref={this.inputMainTopic} />
 						</div>
 						<div className="form-group">
 							<label htmlFor="percentage_concluded">Percentage Concluded</label>

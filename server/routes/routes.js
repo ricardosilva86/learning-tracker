@@ -7,8 +7,12 @@ module.exports = (app) => {
 	app.get("/api/get/:id", LearnController.getAllById);
 	app.get("/api/get/maintopic/:id", LearnController.getMainTopic);
 	app.get("/api/all/maintopics", LearnController.getMainTopicsOnly);
+	app.get("/api/all/topics", LearnController.getTopicsOnly);
+	app.get("/api/all/topics/:id", LearnController.getTopicsByMainTopicId);
 	app.get("/api/get/topic/:id", LearnController.getTopic);
 	app.get("/api/get/subtopic/:id", LearnController.getSubTopic);
+	app.get("/api/all/subtopics", LearnController.getSubTopicsOnly);
+	app.get("/api/all/subtopics/:id", LearnController.getSubTopicsByTopicId);
 	app.get("/api/get/resource/:id", LearnController.getResource);
 
 	//All post routes to API

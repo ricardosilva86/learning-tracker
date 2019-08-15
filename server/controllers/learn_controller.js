@@ -34,6 +34,36 @@ module.exports = {
 			})
 			.catch(next);
 	},
+	getTopicsOnly(req, res, next){
+		Topic.find()
+			.then(topic => {
+				res.send(topic);
+			})
+			.catch(next);
+	},
+	getTopicsByMainTopicId(req, res, next){
+		const mainTopicId = req.params.id;
+		Topic.find({ maintopic_id: mainTopicId})
+			.then(topic => {
+				res.send(topic);
+			})
+			.catch(next);
+	},
+	getSubTopicsOnly(req, res, next){
+		SubTopic.find()
+			.then(subtopic => {
+				res.send(subtopic);
+			})
+			.catch(next);
+	},
+	getSubTopicsByTopicId(req, res, next){
+		const topicId = req.params.id;
+		SubTopic.find({ topic_id: topicId})
+			.then(subtopic => {
+				res.send(subtopic);
+			})
+			.catch(next);
+	},
 	getTopic(req, res, next){
 		const topicId = req.params.id;
 		Topic.findById({_id: topicId})
