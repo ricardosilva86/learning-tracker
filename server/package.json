@@ -8,7 +8,7 @@
     "start": "node index.js",
     "server": "nodemon index.js",
     "client": "npm run start --prefix client",
-    "staging": "concurrently \"node index.js\" \"npm run start --prefix client\"",
+    "restart": "concurrently \"node index.js\" \"npm run start --prefix client\"",
     "dev": "concurrently \"npm run server\" \"npm run client\" \"nodemon --exec 'mocha'\"",
     "lint": "eslint ."
   },
@@ -25,10 +25,10 @@
     "react-select": "^3.0.4"
   },
   "devDependencies": {
-    "babel-eslint": "^10.0.1",
+    "babel-eslint": "^10.0.2",
     "chai": "^4.1.2",
     "chai-http": "^4.2.0",
-    "eslint": "^4.19.1",
+    "eslint": "^6.1.0",
     "eslint-plugin-react": "^7.11.1",
     "mocha": "^5.2.0"
   }

@@ -3,9 +3,9 @@ import Topic from "./Topic";
 import $ from "jquery";
 import axios from "axios";
 
-import { library } from "@fortawesome/fontawesome-svg-core"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faTrash, faEye } from "@fortawesome/free-solid-svg-icons"
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash, faEye } from "@fortawesome/free-solid-svg-icons";
 
 library.add(faTrash, faEye);
 
@@ -32,7 +32,7 @@ class MainTopic extends Component {
 			);
 	}
 
-	onEdit(dado){
+	onEdit(){
 		//console.log(dado._id);
 	}
 	render() {

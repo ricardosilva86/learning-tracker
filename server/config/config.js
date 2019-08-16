@@ -1,5 +1,5 @@
 const passwd = process.env.MONGO_PASSWD;
-const passwdAtlas = process.env.MONGO_PASSWD_ATLAS;
+//const passwdAtlas = process.env.MONGO_PASSWD_ATLAS;
 
 module.exports = {
 	//mongoConnectionString: `mongodb+srv://admin:${passwdAtlas}@learning-tracker-7puau.gcp.mongodb.net/test?retryWrites=true&w=majority`

@@ -7,15 +7,18 @@
         "mocha": true
     },
     "extends": [
+        "standard",
+        "standard-react",
         "eslint:recommended",
         "plugin:react/recommended"
     ],
     "parserOptions": {
         "parser": "babel-eslint",
+        "ecmaVersion": 2018,
         "ecmaFeatures": {
-            "jsx": true
+            "jsx": true,
+            "experimentalObjectRestSpread": true
         },
-        "ecmaVersion": 2017,
         "sourceType": "module"
     },
     "plugins": [
