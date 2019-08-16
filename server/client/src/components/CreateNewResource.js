@@ -36,7 +36,7 @@ class CreateNewResource extends Component{
 		const resSubTopic = await axios.get('/api/all/subtopics');
 		this.setState({ allSubTopics: resSubTopic.data });
 		
-	  }
+	}
 
 	async reloadTopics(maintopicId) {
 		const res = await axios.get('/api/all/topics/'+maintopicId);

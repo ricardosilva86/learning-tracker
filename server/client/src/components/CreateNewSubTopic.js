@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import axios from "axios";
 import $ from "jquery";
-import Select from 'react-select';
+import Select from "react-select";
 
 class CreateNewSubTopic extends Component{
 	constructor(props){
@@ -29,7 +29,7 @@ class CreateNewSubTopic extends Component{
 		const resTopic = await axios.get('/api/all/topics');
 		this.setState({ allTopics: resTopic.data });
 		
-	  }
+	}
 
 	async reloadTopics(maintopicId) {
 		const res = await axios.get('/api/all/topics/'+maintopicId);

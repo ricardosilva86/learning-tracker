@@ -24,11 +24,11 @@ class CreateNewTopic extends Component{
 	async componentDidMount() {
 		const res = await axios.get('/api/all/maintopics');
 		this.setState({ allMainTopics: res.data });
-	  }
+	}
 
 	handleChange = mainTopicSelected => {
 		this.setState({ mainTopicSelected });
-		console.log(`Option selected:`, mainTopicSelected);
+		//console.log(`Option selected:`, mainTopicSelected);
 	};
 
 	onSubmit(e){
