@@ -20,7 +20,7 @@
     "concurrently": "^4.0.1",
     "cors": "^2.8.4",
     "express": "^4.16.3",
-    "mongoose": "^5.2.8",
+    "mongoose": "^5.7.5",
     "react-router-dom": "^4.3.1",
     "react-select": "^3.0.4"
   },
