@@ -3,10 +3,8 @@ const mongoDbName = process.env.MONGO_DB_NAME; //learning-tracker
 const mongoDbUser = process.env.MONGO_DB_USER; //admin
 const mongoDBpass = process.env.MONGO_PASSWD;
 //const passwdAtlas = process.env.MONGO_PASSWD_ATLAS;
-mongodb+srv://admin:<password>@learning-tracker.henw5.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
 
 module.exports = {
-	//mongoConnectionString: `mongodb+srv://admin:${passwdAtlas}@learning-tracker-7puau.gcp.mongodb.net/test?retryWrites=true&w=majority`
-	mongoConnectionString: `mongodb://${mongoDbUser}:${mongoDBpass}@${mongoServer}/${mongoDbName}`
+	//mongoConnectionString: `mongodb://${mongoDbUser}:${mongoDBpass}@${mongoServer}/${mongoDbName}`
 	mongoConnectionString: `mongodb+srv://${mongoDbUser}:${mongoDBpass}@${mongoDbName}.${mongoServer}/${mongoDbName}?retryWrites=true&w=majority`
 };
