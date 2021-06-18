@@ -8,5 +8,5 @@ mongodb+srv://admin:<password>@learning-tracker.henw5.mongodb.net/myFirstDatabas
 module.exports = {
 	//mongoConnectionString: `mongodb+srv://admin:${passwdAtlas}@learning-tracker-7puau.gcp.mongodb.net/test?retryWrites=true&w=majority`
 	mongoConnectionString: `mongodb://${mongoDbUser}:${mongoDBpass}@${mongoServer}/${mongoDbName}`
-	mongoConnectionString: `mongodb+srv://${mongoDbUser}:${mongoDBpass}@${mongoDbName}.${mongoServer}/${mongoDbName}?retryWrites=true&w=majority
+	mongoConnectionString: `mongodb+srv://${mongoDbUser}:${mongoDBpass}@${mongoDbName}.${mongoServer}/${mongoDbName}?retryWrites=true&w=majority`
 };
