@@ -36,6 +36,7 @@ jobs:
       - run: sudo npm install -g chai-http
       - run: sudo npm install eslint -g
       - run: sudo npm install eslint-plugin-react -g
+      - run: npm update
       - run:
           name: Run tests
           command: npm test
