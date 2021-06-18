@@ -20,6 +20,7 @@ jobs:
     # Then run your tests!
     # CircleCI will report the results back to your VCS provider.
     working_directory: ~/project/server
+    
     steps:
       # Checkout the code as the first step.
       - checkout
